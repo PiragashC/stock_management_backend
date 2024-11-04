@@ -1,8 +1,5 @@
-# Use the JDK base image
-FROM eclipse-temurin:17-jdk-alpine
-
-# Install Maven
-RUN apk add --no-cache maven
+# Stage 1: Build the application with Maven
+FROM maven:3.8.5-eclipse-temurin-17 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -14,8 +11,11 @@ COPY src ./src
 # Build the application
 RUN mvn package -DskipTests
 
-# Copy the JAR file
-COPY target/*.jar app.jar
+# Stage 2: Copy the JAR to a lighter image and run it
+FROM eclipse-temurin:17-jdk-alpine
+
+# Copy the JAR from the Maven image
+COPY --from=build /app/target/*.jar app.jar
 
 # Specify the entry point
 ENTRYPOINT ["java", "-jar", "/app.jar"]
