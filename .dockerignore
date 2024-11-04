@@ -1,0 +1,11 @@
+# Ignore the Maven/Gradle build directories
+target/
+build/
+
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore IDE-specific files
+*.idea/
+*.vscode/
