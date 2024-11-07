@@ -19,4 +19,12 @@ public interface StockRepository extends JpaRepository<Stock,String> {
             "AND (:startDate IS NULL OR :endDate IS NULL OR DATE(s.dateOfPurchase) BETWEEN :startDate AND :endDate)")
     Page<StockDto> getAllStock(Pageable pageable, String searchStock, LocalDate startDate, LocalDate endDate);
 
+    @Query("SELECT NEW com.stock.management.system.stock_management.api.dto.StockDto(s.id,s.itemName,s.salesPrice,s.amount) " +
+            "FROM Stock s " +
+            "WHERE :itemName IS NULL OR s.itemName LIKE %:itemName% ")
+    Page<StockDto> getAllStockForPos(String itemName, Pageable pageable);
+
+    @Query("SELECT s FROM Stock s WHERE s.itemName = :itemName ")
+    Stock findByItemName(String itemName);
+
 }

@@ -15,7 +15,7 @@ public class StockConverter {
         stock.setItemName(stockDto.getItemName());
         stock.setPrice(stockDto.getPrice());
         stock.setSalesPrice(stockDto.getSalesPrice());
-        stock.setAmount(stockDto.getAmount());
+        stock.setAmount(stockDto.getBackupQuantity());
         stock.setStore(stockDto.getStore());
         stock.setDateOfPurchase(LocalDateTime.now());
         stock.setCategory(stockDto.getCategory());
@@ -29,7 +29,7 @@ public class StockConverter {
         stockDto.setItemName(stock.getItemName());
         stockDto.setPrice(stock.getPrice());
         stockDto.setSalesPrice(stock.getSalesPrice());
-        stockDto.setAmount(stock.getAmount());
+        stockDto.setBackupQuantity(stock.getAmount());
         stockDto.setStore(stock.getStore());
         stockDto.setDateOfPurchase(stock.getDateOfPurchase());
         stockDto.setCategory(stock.getCategory());
@@ -41,7 +41,7 @@ public class StockConverter {
         existingStock.setItemName(newStock.getItemName());
         existingStock.setPrice(newStock.getPrice());
         existingStock.setSalesPrice(newStock.getSalesPrice());
-        existingStock.setAmount(newStock.getAmount());
+        existingStock.setAmount(newStock.getBackupQuantity());
         existingStock.setStore(newStock.getStore());
         existingStock.setCategory(newStock.getCategory());
 
