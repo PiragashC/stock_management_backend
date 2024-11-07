@@ -1,5 +1,24 @@
+# Stage 1: Build the application with Maven
+FROM maven:3.8.5-eclipse-temurin-17 AS build
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the Maven project files
+COPY pom.xml ./
+COPY src ./src
+
+# Build the application
+RUN mvn package -DskipTests
+
+# Stage 2: Copy the JAR to a lighter image and run it
 FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+# Copy the JAR from the Maven image
+COPY --from=build /app/target/*.jar app.jar
+
+# Specify the entry point
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+# Expose the port
 EXPOSE 1000
