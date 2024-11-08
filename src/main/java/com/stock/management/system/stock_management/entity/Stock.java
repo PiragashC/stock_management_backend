@@ -18,7 +18,7 @@ public class Stock {
     private String itemName;
     private Double price;
     private Double salesPrice;
-    private Integer amount;
+    private Integer backupQuantity;
     private String store;
     private LocalDateTime dateOfPurchase;
     private String category;

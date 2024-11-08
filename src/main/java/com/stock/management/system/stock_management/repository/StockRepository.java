@@ -13,13 +13,13 @@ public interface StockRepository extends JpaRepository<Stock,String> {
 
     boolean existsByItemName(String itemName);
 
-    @Query("SELECT NEW com.stock.management.system.stock_management.api.dto.StockDto(s.serialNumber,s.itemName,s.price,s.salesPrice,s.amount,s.store,s.dateOfPurchase,s.category,s.status) " +
+    @Query("SELECT NEW com.stock.management.system.stock_management.api.dto.StockDto(s.serialNumber,s.itemName,s.price,s.salesPrice,s.backupQuantity,s.store,s.dateOfPurchase,s.category,s.status) " +
             "FROM Stock s " +
             "WHERE (:searchStock IS NULL OR s.itemName LIKE %:searchStock%) " +
             "AND (:startDate IS NULL OR :endDate IS NULL OR DATE(s.dateOfPurchase) BETWEEN :startDate AND :endDate)")
     Page<StockDto> getAllStock(Pageable pageable, String searchStock, LocalDate startDate, LocalDate endDate);
 
-    @Query("SELECT NEW com.stock.management.system.stock_management.api.dto.StockDto(s.id,s.itemName,s.salesPrice,s.amount) " +
+    @Query("SELECT NEW com.stock.management.system.stock_management.api.dto.StockDto(s.id,s.itemName,s.salesPrice,s.backupQuantity) " +
             "FROM Stock s " +
             "WHERE :itemName IS NULL OR s.itemName LIKE %:itemName% ")
     Page<StockDto> getAllStockForPos(String itemName, Pageable pageable);

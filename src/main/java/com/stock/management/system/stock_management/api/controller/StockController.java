@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping("api/v1/stock")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class StockController {
 
     private final StockService stockService;
@@ -31,7 +32,7 @@ public class StockController {
         return stockService.deleteStock(stockId);
     }
 
-    @PutMapping
+    @PatchMapping
     public ResponseDto updateStock(@RequestBody StockDto stockDto){
         return stockService.updateStock(stockDto);
     }

@@ -33,8 +33,8 @@ public class PosService {
         Pos savedPos = posRepository.save(posConverter.convert(posDto));
 
         Stock stock = stockRepository.findByItemName(savedPos.getItemName());
-        Integer remainingStock = stock.getAmount() - savedPos.getQuantity();
-        stock.setAmount(remainingStock);
+        Integer remainingStock = stock.getBackupQuantity() - savedPos.getQuantity();
+        stock.setBackupQuantity(remainingStock);
         stockRepository.save(stock);
         return new ResponseDto("Pos saved");
     }

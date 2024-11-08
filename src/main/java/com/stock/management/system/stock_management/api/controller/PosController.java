@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping("api/v1/pos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class PosController {
 
     private final PosService posService;
