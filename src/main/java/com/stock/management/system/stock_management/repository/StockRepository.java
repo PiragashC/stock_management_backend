@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface StockRepository extends JpaRepository<Stock,String> {
 
@@ -22,7 +23,7 @@ public interface StockRepository extends JpaRepository<Stock,String> {
     @Query("SELECT NEW com.stock.management.system.stock_management.api.dto.StockDto(s.id,s.itemName,s.salesPrice,s.backupQuantity) " +
             "FROM Stock s " +
             "WHERE :itemName IS NULL OR s.itemName LIKE %:itemName% ")
-    Page<StockDto> getAllStockForPos(String itemName, Pageable pageable);
+    List<StockDto> getAllStockForPos(String itemName);
 
     @Query("SELECT s FROM Stock s WHERE s.itemName = :itemName ")
     Stock findByItemName(String itemName);

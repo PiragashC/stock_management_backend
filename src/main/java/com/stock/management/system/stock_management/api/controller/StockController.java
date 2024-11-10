@@ -32,7 +32,7 @@ public class StockController {
         return stockService.deleteStock(stockId);
     }
 
-    @PatchMapping
+    @PutMapping
     public ResponseDto updateStock(@RequestBody StockDto stockDto){
         return stockService.updateStock(stockDto);
     }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/pos")
@@ -24,10 +25,8 @@ public class PosController {
     }
 
     @GetMapping
-    public PaginatedResponseDto<StockDto> getAllStockForPos(@RequestParam(value = "itemName",required = false) String itemName,
-                                                            @RequestParam(value = "page",required = false) Integer page,
-                                                            @RequestParam(value = "size",required = false) Integer size){
-        return posService.getAllStockForPos(itemName,page,size);
+    public List<StockDto> getAllStockForPos(@RequestParam(value = "itemName",required = false) String itemName){
+        return posService.getAllStockForPos(itemName);
     }
 
     @GetMapping("/getAllPos")

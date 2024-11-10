@@ -39,18 +39,8 @@ public class PosService {
         return new ResponseDto("Pos saved");
     }
 
-    public PaginatedResponseDto<StockDto> getAllStockForPos(String itemName,Integer page,Integer size) {
-        Pageable pageable = PageRequest.of(page - 1,size);
-        Page<StockDto> stockDtos = stockRepository.getAllStockForPos(itemName,pageable);
-        List<StockDto> stockDtoList = stockDtos.getContent();
-
-        PaginatedResponseDto<StockDto> responseDto = new PaginatedResponseDto<>();
-        responseDto.setData(stockDtoList);
-        responseDto.setCurrentPage(page);
-        responseDto.setTotalItems(stockDtos.getTotalElements());
-        responseDto.setTotalPages(stockDtos.getTotalPages());
-
-        return responseDto;
+    public List<StockDto> getAllStockForPos(String itemName) {
+        return stockRepository.getAllStockForPos(itemName);
     }
 
     public PaginatedResponseDto<PosDto> getAllTransactions(LocalDate fromDate, LocalDate toDate, Integer page, Integer size) {
